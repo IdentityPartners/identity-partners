@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 
 // Random identity image
 const identityImages = await glob({
-  pattern: '/assets/images/identity/*',
+  pattern: 'public/assets/images/identity/*',
 });
 const identity = identityImages[Math.floor(Math.random() * identityImages.length)];
 ---
@@ -14,8 +14,8 @@ const identity = identityImages[Math.floor(Math.random() * identityImages.length
       <h1>Identity Work That Actually Works</h1>
       <p>
         You don’t need to perform here. You don’t need to impress anyone.  
-        You don’t need to pretend you’re fine.  
-        You just need to show up — and we’ll meet you where you are.
+        You don’t need to pretend you’re "fine".  
+        You just need to show up;  we’ll meet you where you are.
       </p>
     </div>
 
