@@ -1,0 +1,79 @@
+---
+import { glob } from 'astro/loaders';
+
+// Random therapy image
+const therapyImages = await glob({
+  pattern: '/assets/images/therapy/*',
+});
+const therapy = therapyImages[Math.floor(Math.random() * therapyImages.length)];
+---
+
+<section class="footer-block">
+  <div class="inner">
+    <div class="visual">
+      <img src={therapy.src} alt="Therapy" />
+    </div>
+
+    <div class="text">
+      <h2>Real Work Happens in Real Relationships</h2>
+      <p>
+        Identity work is not abstract.  
+        It’s grounded, human, relational, and lived.  
+        You don’t do it alone — you do it with someone who can hold the weight with you.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .footer-block {
+    padding: 4rem 1.5rem;
+    background: var(--surface);
+    border-top: 2px solid var(--border);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .visual {
+    flex: 1;
+    text-align: left;
+  }
+
+  .visual img {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .text {
+    flex: 1;
+  }
+
+  .text h2 {
+    color: var(--accent);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .text p {
+    color: var(--foreground);
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 800px) {
+    .inner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .visual {
+      text-align: center;
+    }
+  }
+</style>

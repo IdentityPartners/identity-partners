@@ -1,0 +1,131 @@
+---
+const services = [
+  {
+    id: 1,
+    title: "Single Sessions",
+    summary: "Focused, flexible, relational sessions for clarity, grounding, and immediate support.",
+    items: [
+      "Empathetic Listening",
+      "Solution‑Focused Socratic Questioning",
+      "AIBU / AAITA / AITOO / AIGC Vent Sessions",
+      "Cheerleading & Validation",
+      "Motivation & Reorientation"
+    ]
+  },
+  {
+    id: 2,
+    title: "Life Transitions",
+    summary: "Structured support through identity‑shifting moments and major life changes.",
+    items: [
+      "Career Change",
+      "Return to Education",
+      "Relocation",
+      "ND Late Diagnosis",
+      "Familial Estrangement",
+      "Physical Assault",
+      "Relationship Breakdown",
+      "Mental Breakdown",
+      "Bereavement"
+    ]
+  },
+  {
+    id: 3,
+    title: "Programmes & Pathways",
+    summary: "Deep identity work and structured evaluation pathways for long‑term alignment.",
+    items: [
+      "ILEAP — Identity & Lifestyle Evaluation & Alignment Pathway",
+      "IAMSUPER — Intentional, Autonomous, Meaningful Substance Use Programme"
+    ]
+  },
+  {
+    id: 4,
+    title: "Subscriptions",
+    summary: "Ongoing relational support, accountability, and structured momentum.",
+    items: [
+      "Ongoing Companionship",
+      "Ongoing Productivity",
+      "Implementation Tracking"
+    ]
+  }
+];
+---
+
+<section class="carousel">
+  <h2>Our Services</h2>
+
+  <div class="track">
+    {services.map(s => (
+      <article class="card" key={s.id}>
+        <h3>{s.title}</h3>
+        <p class="summary">{s.summary}</p>
+
+        <ul class="list">
+          {s.items.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .carousel {
+    background: #f7f3e9; /* parchment */
+    padding: 4rem 1.5rem;
+    border-top: 2px solid #7a4254; /* rose line */
+  }
+
+  h2 {
+    color: #0f3b3a; /* deep teal */
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+  }
+
+  .track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    min-width: 300px;
+    max-width: 340px;
+    background: #f0e9e0; /* soft ivory */
+    border: 1px solid #7a4254; /* rose line */
+    padding: 1.5rem;
+    border-radius: 8px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  .card h3 {
+    margin: 0 0 0.5rem;
+    color: #0f3b3a; /* deep teal */
+  }
+
+  .summary {
+    color: #5c2d3f; /* deep rose */
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #5c2d3f;
+  }
+
+  .list li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+  }
+</style>

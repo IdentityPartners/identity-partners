@@ -1,0 +1,68 @@
+---
+import { glob } from 'astro/loaders';
+
+// Random landscape image
+const landscapeImages = await glob({
+  pattern: '/assets/images/landscape/*',
+});
+const landscape = landscapeImages[Math.floor(Math.random() * landscapeImages.length)];
+---
+
+<section class="left-rect">
+  <div class="content">
+    <h2>Identity Work That Meets You Where You Are</h2>
+    <p>
+      We help people understand themselves with clarity, honesty, and structure.
+      No jargon. No performance. Just grounded relational work.
+    </p>
+  </div>
+
+  <div class="visual">
+    <img src={landscape.src} alt="Landscape" />
+  </div>
+</section>
+
+<style>
+  .left-rect {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 1.5rem;
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .content {
+    flex: 1;
+  }
+
+  .content h2 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .content p {
+    color: var(--foreground);
+    line-height: 1.6;
+  }
+
+  .visual {
+    flex: 1;
+    text-align: right;
+  }
+
+  .visual img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 800px) {
+    .left-rect {
+      flex-direction: column;
+      text-align: center;
+    }
+    .visual {
+      text-align: center;
+    }
+  }
+</style>

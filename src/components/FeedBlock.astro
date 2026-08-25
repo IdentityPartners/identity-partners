@@ -1,0 +1,199 @@
+---
+/*
+  FEED SOURCES
+  ------------
+  We do NOT scrape or reproduce copyrighted content.
+  We only provide safe summaries + links to original sources.
+*/
+
+/* YOUR OWN FEED (always first) */
+const identityPartnersFeed = [
+  {
+    name: "Identity Partners — Practice Notes",
+    url: "https://your-substack-or-site-url",
+    summary: "Writing from our own practice: identity, relational work, embodiment, and grounded therapeutic process.",
+  }
+];
+
+/* TRUSTED SUBSTACKS */
+const trustedSubstacks = [
+  {
+    name: "Gabor Maté — Trauma & Healing",
+    url: "https://drgabormate.substack.com",
+    summary: "Compassionate, trauma-informed reflections on identity, addiction, attachment, and social context.",
+  },
+  {
+    name: "Dr Lil Jednak — Relational Identity",
+    url: "https://liljednak.substack.com",
+    summary: "Deep relational identity work, trauma literacy, embodiment, and clinical insight.",
+  }
+];
+
+/* ROTATING LESSER-KNOWN SUBSTACK WRITERS */
+const emergingSubstacks = [
+  {
+    name: "Trauma Field Notes",
+    url: "https://traumafieldnotes.substack.com",
+    summary: "Early-career clinician writing about trauma, embodiment, and identity formation.",
+  },
+  {
+    name: "Relational Depth Weekly",
+    url: "https://relationaldepthweekly.substack.com",
+    summary: "Emerging relational therapist exploring attachment, rupture, and repair.",
+  },
+  {
+    name: "Everyday Embodiment",
+    url: "https://everydayembodiment.substack.com",
+    summary: "Somatic micro-reflections on identity, grounding, and lived experience.",
+  }
+];
+
+/* PSYCHOLOGY TODAY — SELECTED AUTHORS */
+const psychTodayAuthors = [
+  {
+    name: "Steven Stosny (Compassion & Identity Patterns)",
+    url: "https://www.psychologytoday.com/us/contributors/steven-stosny-phd",
+    summary: "Compassion-based identity work, emotional regulation, and relational patterns.",
+  },
+  {
+    name: "Susan David (Emotional Agility)",
+    url: "https://www.psychologytoday.com/us/contributors/susan-david-phd",
+    summary: "Emotional agility, values-based identity, and psychological flexibility.",
+  },
+  {
+    name: "Diane Poole Heller (Attachment)",
+    url: "https://www.psychologytoday.com/us/contributors/diane-poole-heller-phd",
+    summary: "Attachment dynamics, relational safety, and identity development.",
+  },
+  {
+    name: "Margaret Wehrenberg (Anxiety & Identity)",
+    url: "https://www.psychologytoday.com/us/contributors/margaret-wehrenberg-psyd",
+    summary: "Anxiety patterns, identity formation, and emotional resilience.",
+  }
+];
+
+/* RANDOMISATION */
+const randomEmerging = emergingSubstacks[Math.floor(Math.random() * emergingSubstacks.length)];
+const randomPsychToday = psychTodayAuthors[Math.floor(Math.random() * psychTodayAuthors.length)];
+---
+
+<section class="feed-block">
+  <div class="inner">
+
+    <!-- YOUR FEED -->
+    <h2>Identity Partners — Writing & Reflections</h2>
+    <div class="feed-list">
+      {identityPartnersFeed.map(item => (
+        <div class="feed-item">
+          <h3>{item.name}</h3>
+          <p>{item.summary}</p>
+          <a href={item.url} target="_blank">Read more</a>
+        </div>
+      ))}
+    </div>
+
+    <!-- TRUSTED THINKERS -->
+    <h2>Trusted Thinkers</h2>
+    <div class="feed-list">
+      {trustedSubstacks.map(item => (
+        <div class="feed-item">
+          <h3>{item.name}</h3>
+          <p>{item.summary}</p>
+          <a href={item.url} target="_blank">Visit Substack</a>
+        </div>
+      ))}
+    </div>
+
+    <!-- EMERGING VOICES (ROTATING) -->
+    <h2>Emerging Voices</h2>
+    <div class="feed-list">
+      <div class="feed-item">
+        <h3>{randomEmerging.name}</h3>
+        <p>{randomEmerging.summary}</p>
+        <a href={randomEmerging.url} target="_blank">Visit Substack</a>
+      </div>
+    </div>
+
+    <!-- PSYCHOLOGY TODAY (ROTATING) -->
+    <h2>Psychology Today — Selected Authors</h2>
+    <div class="feed-list">
+      <div class="feed-item">
+        <h3>{randomPsychToday.name}</h3>
+        <p>{randomPsychToday.summary}</p>
+        <a href={randomPsychToday.url} target="_blank">Read articles</a>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer">
+      <p>
+        <strong>We are passionate about lending our voice to emerging writers as well as trusted thinkers.</strong><br />
+        This is a live feed; individual items have not been vetted or moderated and therefore cannot be taken to accurately represent the professional views of Identity Partners nor its Practitioners.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .feed-block {
+    padding: 4rem 1.5rem;
+    background: var(--surface);
+    border-top: 2px solid var(--border);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    color: var(--accent);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .feed-list {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .feed-item {
+    background: var(--background);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .feed-item h3 {
+    margin-top: 0;
+    color: var(--accent);
+  }
+
+  .feed-item p {
+    color: var(--foreground);
+    line-height: 1.6;
+  }
+
+  .feed-item a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .disclaimer {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--background);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .disclaimer p {
+    color: var(--foreground);
+    line-height: 1.6;
+  }
+</style>

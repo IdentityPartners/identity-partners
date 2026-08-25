@@ -1,0 +1,52 @@
+---
+import { glob } from 'astro/loaders';
+
+// Random texture image
+const textureImages = await glob({
+  pattern: '/assets/images/textures/*',
+});
+const texture = textureImages[Math.floor(Math.random() * textureImages.length)];
+---
+
+<section class="texture-block">
+  <div class="overlay">
+    <h2>Grounding Matters</h2>
+    <p>
+      Identity work isn’t just insight — it’s embodiment.  
+      You need places to land, pause, breathe, and reconnect.
+    </p>
+  </div>
+</section>
+
+<style>
+  .texture-block {
+    padding: 4rem 1.5rem;
+    border-bottom: 2px solid var(--border);
+    background-image: url({texture.src});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  .overlay {
+    background: rgba(247, 243, 233, 0.85); /* soft parchment overlay */
+    padding: 3rem;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .overlay h2 {
+    color: var(--accent);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .overlay p {
+    color: var(--foreground);
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+</style>

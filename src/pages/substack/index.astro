@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// Replace with your actual Substack feed URL once confirmed
+const feedUrl = "https://substack.com/feed/@identitypartners";
+
+const response = await fetch(feedUrl);
+const xml = await response.text();
+
+// Basic RSS parsing
+const parser = new DOMParser();
+const rss = parser.parseFromString(xml, "application/xml");
+const items = rss.querySelectorAll("item");
+
+const posts = Array.from(items).map((item) => ({
+  title: item.querySelector("title")?.textContent ?? "",
+  link: item.querySelector("link")?.textContent ?? "",
+  author: item.querySelector("dc\\:creator")?.textContent ?? "",
+  date: item.querySelector("pubDate")?.textContent ?? "",
+  description: item.querySelector("description")?.textContent ?? "",
+}));
+---
+
+<BaseLayout title="Substack">
+  <h1>Substack</h1>
+
+  <p>
+    Our Substack is where Si, Livv, and guest writers publish long-form writing
+    for Identity Partners. This page automatically shows the latest posts from
+    our publication.
+  </p>
+
+  <ul>
+    {posts.map((post) => (
+      <li>
+        <a href={post.link}>{post.title}</a>
+        {post.author && <p><strong>By:</strong> {post.author}</p>}
+        {post.date && <p><em>{post.date}</em></p>}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

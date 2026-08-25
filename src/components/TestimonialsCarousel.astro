@@ -1,0 +1,151 @@
+---
+const testimonials = [
+  {
+    id: 1,
+    name: "Client, 34, Woman",
+    reason: "Achievement‑based identity, chronic masking",
+    text: "Si, Livv — I came to you because I didn’t know who I was when I wasn’t achieving something. Every part of my life felt like a performance. You helped me hear myself again. I’m finally living as a person, not a résumé.",
+    response: "We’re glad you let us walk with you as you rebuilt your identity from the inside out. You did the hard work of slowing down and choosing yourself."
+  },
+  {
+    id: 2,
+    name: "Client, 41, Man",
+    reason: "Emotional masking, relational disconnection",
+    text: "I didn’t want counselling. I wanted someone who could help me understand why I’d built a life I couldn’t feel. You both saw straight through the armour. I learned how to connect without losing myself.",
+    response: "You brought honesty and courage into the room. We simply helped you make sense of the patterns you were already noticing."
+  },
+  {
+    id: 3,
+    name: "Client, 29, Non‑binary",
+    reason: "Boundary collapse, high empathy",
+    text: "I came to you because I couldn’t tell where other people ended and I began. You helped me build boundaries that feel protective instead of rejecting. I finally have space inside myself.",
+    response: "You learned to hold your sensitivity as strength rather than burden. That shift was yours — we just supported the process."
+  },
+  {
+    id: 4,
+    name: "Client, 47, Woman",
+    reason: "Post‑rupture identity reconstruction",
+    text: "When my life collapsed, I didn’t know how to start again. You didn’t minimise anything. You helped me rebuild piece by piece, without pretending it was easy. I feel grounded for the first time in years.",
+    response: "You showed extraordinary resilience. We simply helped you organise the pieces into a life that fits."
+  },
+  {
+    id: 5,
+    name: "Client, 38, Man",
+    reason: "Professional burnout, loss of direction",
+    text: "I thought exhaustion was just who I was. You helped me see how my identity had been shaped by pressure, not choice. I’ve reconnected with what actually matters.",
+    response: "You reclaimed your agency. We’re proud of how deliberately you rebuilt your direction."
+  },
+  {
+    id: 6,
+    name: "Client, 32, Woman",
+    reason: "Late‑identified neurodivergence, lifelong masking",
+    text: "I’d spent decades hiding how hard everything was. You helped me understand my neurodivergence as part of my identity, not a flaw. I feel coherent instead of fragmented.",
+    response: "You brought depth, insight, and honesty. We simply helped you integrate the parts you’d been carrying alone."
+  },
+  {
+    id: 7,
+    name: "Client, 26, Man",
+    reason: "Post‑religious identity drift",
+    text: "After leaving my church, I felt like I’d lost the structure that held me together. You helped me build meaning that fits who I am now. I feel grounded instead of lost.",
+    response: "You honoured your past while building a future that’s authentically yours. That balance is hard — and you did it."
+  },
+  {
+    id: 8,
+    name: "Client, 31, Woman",
+    reason: "Digital‑era dissociation, relational undernourishment",
+    text: "I was constantly online but emotionally disconnected. You helped me understand how my identity had become blurred by hyperconnectivity. I feel present again — in my relationships and in myself.",
+    response: "You chose presence over distraction. We’re glad we could help you make that shift."
+  },
+  {
+    id: 9,
+    name: "Client, 44, Man",
+    reason: "Repeating attachment patterns",
+    text: "I kept repeating the same relational patterns and didn’t know why. You helped me understand the identity structures underneath them. I’m building relationships that feel secure instead of chaotic.",
+    response: "You faced your patterns with honesty and courage. That’s what made the change possible."
+  },
+  {
+    id: 10,
+    name: "Client, 36, Woman",
+    reason: "People‑pleasing, chronic self‑abandonment",
+    text: "I didn’t know how to have needs without feeling guilty. You helped me build an identity that includes me. I’m more honest, more grounded, and still deeply connected.",
+    response: "You learned to hold your needs with dignity. That’s the foundation of sustainable connection."
+  }
+];
+---
+
+<section class="carousel">
+  <h2>Testimonials</h2>
+
+  <div class="track">
+    {testimonials.map(t => (
+      <article class="card" key={t.id}>
+        <h3>{t.name}</h3>
+        <p class="reason">{t.reason}</p>
+        <p class="text">“{t.text}”</p>
+        <p class="response"><strong>Practitioner response:</strong> {t.response}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .carousel {
+    background: #f7f3e9;
+    padding: 4rem 1.5rem;
+    border-top: 2px solid #7a4254;
+  }
+
+  h2 {
+    color: #0f3b3a;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+  }
+
+  .track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .track::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .card {
+    min-width: 300px;
+    max-width: 340px;
+    background: #f0e9e0;
+    border: 1px solid #7a4254;
+    padding: 1.5rem;
+    border-radius: 8px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  .card h3 {
+    margin: 0 0 0.5rem;
+    color: #0f3b3a;
+  }
+
+  .reason {
+    color: #a88792;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .text {
+    color: #5c2d3f;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .response {
+    color: #0f3b3a;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+  }
+</style>
