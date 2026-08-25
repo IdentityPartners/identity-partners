@@ -1,42 +1,28 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-
-// Replace with your actual Substack feed URL once confirmed
-const feedUrl = "https://substack.com/feed/@identitypartners";
-
-const response = await fetch(feedUrl);
-const xml = await response.text();
-
-// Basic RSS parsing
-const parser = new DOMParser();
-const rss = parser.parseFromString(xml, "application/xml");
-const items = rss.querySelectorAll("item");
-
-const posts = Array.from(items).map((item) => ({
-  title: item.querySelector("title")?.textContent ?? "",
-  link: item.querySelector("link")?.textContent ?? "",
-  author: item.querySelector("dc\\:creator")?.textContent ?? "",
-  date: item.querySelector("pubDate")?.textContent ?? "",
-  description: item.querySelector("description")?.textContent ?? "",
-}));
 ---
 
 <BaseLayout title="Substack">
-  <h1>Substack</h1>
+  <section style="padding: 4rem 1.5rem; max-width: 900px; margin: 0 auto;">
+    <h1 style="color: var(--accent);">Identity Partners on Substack</h1>
 
-  <p>
-    Our Substack is where Si, Livv, and guest writers publish long-form writing
-    for Identity Partners. This page automatically shows the latest posts from
-    our publication.
-  </p>
+    <p style="line-height: 1.6; color: var(--foreground); margin-top: 1.5rem;">
+      Our writing, essays, reflections, and long-form thinking live on Substack.
+      You can read, subscribe, and follow our work directly there.
+    </p>
 
-  <ul>
-    {posts.map((post) => (
-      <li>
-        <a href={post.link}>{post.title}</a>
-        {post.author && <p><strong>By:</strong> {post.author}</p>}
-        {post.date && <p><em>{post.date}</em></p>}
-      </li>
-    ))}
-  </ul>
+    <p style="margin-top: 2rem;">
+      <a href="https://identitypartners.substack.com" target="_blank"
+         style="background: var(--accent); color: var(--surface); padding: 0.75rem 1.5rem;
+                border-radius: 8px; font-weight: 600; text-decoration: none;">
+        Visit our Substack
+      </a>
+    </p>
+
+    <p style="margin-top: 2rem; line-height: 1.6;">
+      Substack does not allow embedding without client-side scripts, and Astro prerendering
+      does not support DOMParser or browser-only APIs.  
+      So this page links directly to our Substack instead of embedding it.
+    </p>
+  </section>
 </BaseLayout>
