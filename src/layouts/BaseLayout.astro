@@ -3,13 +3,13 @@ import { glob } from 'astro/loaders';
 
 // Random sunrise background for hero
 const sunriseImages = await glob({
-  pattern: '/assets/images/sunrise/*',
+  pattern: 'public/assets/images/sunrise/*',
 });
 const sunriseBg = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
 
 // Random texture background for footer
 const textureImages = await glob({
-  pattern: '/assets/images/textures/*',
+  pattern: 'public/assets/images/textures/*',
 });
 const textureBg = textureImages[Math.floor(Math.random() * textureImages.length)];
 
