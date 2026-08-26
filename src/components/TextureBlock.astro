@@ -1,13 +1,19 @@
 ---
-import { glob } from 'astro/loaders';
+/**
+ * Randomly select an image from the textures folder.
+ * import.meta.glob eagerly loads all files at build time.
+ */
 
-const landscapeImages = await glob({
-  pattern: 'public/assets/images/landscape/*',
-});
-const landscape = landscapeImages[Math.floor(Math.random() * landscapeImages.length)];
+const textureImages = import.meta.glob('../assets/images/textures/*', { eager: true });
+
+// Convert the object of modules into an array
+const textureFiles = Object.values(textureImages);
+
+// Pick one at random
+const textureBg = textureFiles[Math.floor(Math.random() * textureFiles.length)];
 ---
 
-<section class="texture-block" style={`background-image: url(${landscape.src});`}>
+<section class="texture-block" style={`background-image: url(${textureBg.default.src});`}>
   <div class="overlay">
     <h2>Grounding Matters</h2>
     <p>Identity work needs places to land, pause, breathe.</p>
@@ -31,5 +37,3 @@ const landscape = landscapeImages[Math.floor(Math.random() * landscapeImages.len
     text-align: center;
   }
 </style>
-
-

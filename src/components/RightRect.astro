@@ -1,16 +1,21 @@
 ---
-import { glob } from 'astro/loaders';
+/**
+ * Randomly select an image from the partnering folder.
+ * import.meta.glob eagerly loads all files at build time.
+ */
 
-// Random partnering image
-const partneringImages = await glob({
-  pattern: '/assets/images/partnering/*',
-});
-const partnering = partneringImages[Math.floor(Math.random() * partneringImages.length)];
+const partneringImages = import.meta.glob('../assets/images/partnering/*', { eager: true });
+
+// Convert the object of modules into an array
+const partneringFiles = Object.values(partneringImages);
+
+// Pick one at random
+const partnering = partneringFiles[Math.floor(Math.random() * partneringFiles.length)];
 ---
 
 <section class="right-rect">
   <div class="visual">
-    <img src={partnering.src} alt="Partnering" />
+    <img src={partnering.default.src} alt="Partnering" />
   </div>
 
   <div class="content">

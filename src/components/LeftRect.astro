@@ -1,11 +1,16 @@
 ---
-import { glob } from 'astro/loaders';
+/**
+ * Randomly select an image from the landscape folder.
+ * import.meta.glob eagerly loads all files at build time.
+ */
 
-// Random landscape image
-const landscapeImages = await glob({
-  pattern: '/assets/images/landscape/*',
-});
-const landscape = landscapeImages[Math.floor(Math.random() * landscapeImages.length)];
+const landscapeImages = import.meta.glob('../assets/images/landscape/*', { eager: true });
+
+// Convert the object of modules into an array
+const landscapeFiles = Object.values(landscapeImages);
+
+// Pick one at random
+const landscape = landscapeFiles[Math.floor(Math.random() * landscapeFiles.length)];
 ---
 
 <section class="left-rect">
@@ -18,7 +23,7 @@ const landscape = landscapeImages[Math.floor(Math.random() * landscapeImages.len
   </div>
 
   <div class="visual">
-    <img src={landscape.src} alt="Landscape" />
+    <img src={landscape.default.src} alt="Landscape" />
   </div>
 </section>
 

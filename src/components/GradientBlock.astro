@@ -1,17 +1,25 @@
 ---
-import { glob } from 'astro/loaders';
+/**
+ * Randomly select an image from the sunrise folder.
+ * import.meta.glob eagerly loads all files at build time.
+ */
 
-const sunriseImages = await glob({
-  pattern: 'public/assets/images/sunrise/*',
-});
-const sunrise = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
+const sunriseImages = import.meta.glob('../assets/images/sunrise/*', { eager: true });
+
+// Convert the object of modules into an array
+const sunriseFiles = Object.values(sunriseImages);
+
+// Pick one at random
+const sunrise = sunriseFiles[Math.floor(Math.random() * sunriseFiles.length)];
 ---
 
 <section class="gradient-block">
   <div class="inner">
     <h2>Clarity Emerges Gradually</h2>
     <p>Identity work isn’t a switch — it’s a gradient.</p>
-    <img src={sunrise.src} alt="Sunrise" class="sunrise-img" />
+
+    <!-- Use the actual Astro-generated URL -->
+    <img src={sunrise.default.src} alt="Sunrise" class="sunrise-img" />
   </div>
 </section>
 
@@ -33,5 +41,3 @@ const sunrise = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
     margin-top: 2rem;
   }
 </style>
-
-

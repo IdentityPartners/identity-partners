@@ -1,17 +1,22 @@
 ---
-import { glob } from 'astro/loaders';
+/**
+ * Randomly select an image from the therapy folder.
+ * import.meta.glob eagerly loads all files at build time.
+ */
 
-// Random therapy image
-const therapyImages = await glob({
-  pattern: '/assets/images/therapy/*',
-});
-const therapy = therapyImages[Math.floor(Math.random() * therapyImages.length)];
+const therapyImages = import.meta.glob('../assets/images/therapy/*', { eager: true });
+
+// Convert the object of modules into an array
+const therapyFiles = Object.values(therapyImages);
+
+// Pick one at random
+const therapy = therapyFiles[Math.floor(Math.random() * therapyFiles.length)];
 ---
 
 <section class="footer-block">
   <div class="inner">
     <div class="visual">
-      <img src={therapy.src} alt="Therapy" />
+      <img src={therapy.default.src} alt="Therapy" />
     </div>
 
     <div class="text">

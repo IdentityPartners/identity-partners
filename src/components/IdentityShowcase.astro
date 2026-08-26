@@ -1,37 +1,36 @@
 ---
-import { glob } from 'astro/loaders';
+/**
+ * Randomly select images from each folder.
+ * import.meta.glob eagerly loads all files at build time.
+ */
 
-// Small identity image
-const identityImages = await glob({
-  pattern: 'public/assets/images/identity/*',
-});
-const identity = identityImages[Math.floor(Math.random() * identityImages.length)];
+// Identity (small)
+const identityImages = import.meta.glob('../assets/images/identity/*', { eager: true });
+const identityFiles = Object.values(identityImages);
+const identity = identityFiles[Math.floor(Math.random() * identityFiles.length)];
 
-// Small partnering image
-const partneringImages = await glob({
-  pattern: 'public/assets/images/partnering/*',
-});
-const partnering = partneringImages[Math.floor(Math.random() * partneringImages.length)];
+// Partnering (small)
+const partneringImages = import.meta.glob('../assets/images/partnering/*', { eager: true });
+const partneringFiles = Object.values(partneringImages);
+const partnering = partneringFiles[Math.floor(Math.random() * partneringFiles.length)];
 
-// Large sunrise background
-const sunriseImages = await glob({
-  pattern: 'public/assets/images/sunrise/*',
-});
-const sunrise = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
+// Sunrise (background)
+const sunriseImages = import.meta.glob('../assets/images/sunrise/*', { eager: true });
+const sunriseFiles = Object.values(sunriseImages);
+const sunrise = sunriseFiles[Math.floor(Math.random() * sunriseFiles.length)];
 
-// Large landscape background
-const landscapeImages = await glob({
-  pattern: 'public/assets/images/landscape/*',
-});
-const landscape = landscapeImages[Math.floor(Math.random() * landscapeImages.length)];
+// Landscape (background)
+const landscapeImages = import.meta.glob('../assets/images/landscape/*', { eager: true });
+const landscapeFiles = Object.values(landscapeImages);
+const landscape = landscapeFiles[Math.floor(Math.random() * landscapeFiles.length)];
 ---
 
 <section class="identity-showcase">
   <div class="inner">
 
     <div class="small-images">
-      <img src={identity.src} alt="Identity" class="small-img" />
-      <img src={partnering.src} alt="Partnering" class="small-img" />
+      <img src={identity.default.src} alt="Identity" class="small-img" />
+      <img src={partnering.default.src} alt="Partnering" class="small-img" />
     </div>
 
     <div class="background sunrise-bg">
@@ -79,13 +78,13 @@ const landscape = landscapeImages[Math.floor(Math.random() * landscapeImages.len
   }
 
   .sunrise-bg {
-    background-image: url({sunrise.src});
+    background-image: url({sunrise.default.src});
     background-size: cover;
     background-position: center;
   }
 
   .landscape-bg {
-    background-image: url({landscape.src});
+    background-image: url({landscape.default.src});
     background-size: cover;
     background-position: center;
   }
@@ -94,5 +93,4 @@ const landscape = landscapeImages[Math.floor(Math.random() * landscapeImages.len
     color: var(--accent);
     margin-bottom: 1rem;
   }
-
 </style>

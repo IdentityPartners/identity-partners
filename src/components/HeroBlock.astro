@@ -1,26 +1,31 @@
 ---
-import { glob } from 'astro/loaders';
+/**
+ * Randomly select an image from the identity folder.
+ * import.meta.glob eagerly loads all files at build time.
+ */
 
-// Random identity image
-const identityImages = await glob({
-  pattern: 'public/assets/images/identity/*',
-});
-const identity = identityImages[Math.floor(Math.random() * identityImages.length)];
+const identityImages = import.meta.glob('../assets/images/identity/*', { eager: true });
+
+// Convert the object of modules into an array
+const identityFiles = Object.values(identityImages);
+
+// Pick one at random
+const identity = identityFiles[Math.floor(Math.random() * identityFiles.length)];
 ---
 
 <section class="hero-block">
   <div class="inner">
-    <div class="text">,
+    <div class="text">
       <h1>Identity work that works for you</h1>
       <p>
         You don’t need to perform here. You don’t need to impress anyone.  
         You don’t need to pretend you’re "fine".  
-        You just need to show up;  we’ll meet you where you are.
+        You just need to show up; we’ll meet you where you are.
       </p>
     </div>
 
     <div class="visual">
-      <img src={identity.src} alt="Identity" />
+      <img src={identity.default.src} alt="Identity" />
     </div>
   </div>
 </section>
