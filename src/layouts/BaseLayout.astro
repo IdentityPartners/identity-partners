@@ -1,17 +1,16 @@
 ---
-import { glob } from 'astro/loaders';
+/**
+ * Random sunrise + texture backgrounds using import.meta.glob
+ * (Cloudflare‑safe, Astro‑safe, no .src errors)
+ */
 
-// Random sunrise background for hero
-const sunriseImages = await glob({
-  pattern: 'public/assets/images/sunrise/*',
-});
-const sunriseBg = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
+const sunriseImages = import.meta.glob('../assets/images/sunrise/*', { eager: true });
+const sunriseFiles = Object.values(sunriseImages);
+const sunriseBg = sunriseFiles[Math.floor(Math.random() * sunriseFiles.length)];
 
-// Random texture background for footer
-const textureImages = await glob({
-  pattern: 'public/assets/images/textures/*',
-});
-const textureBg = textureImages[Math.floor(Math.random() * textureImages.length)];
+const textureImages = import.meta.glob('../assets/images/textures/*', { eager: true });
+const textureFiles = Object.values(textureImages);
+const textureBg = textureFiles[Math.floor(Math.random() * textureFiles.length)];
 
 const title = Astro.props.title ?? "Identity Partners";
 ---
@@ -63,7 +62,7 @@ const title = Astro.props.title ?? "Identity Partners";
       }
 
       .hero {
-        background: url({sunriseBg.src}) center/cover no-repeat;
+        background: url({sunriseBg.default.src}) center/cover no-repeat;
         padding: 6rem 1.5rem 4rem;
         text-align: center;
         border-bottom: 2px solid var(--border);
@@ -86,7 +85,7 @@ const title = Astro.props.title ?? "Identity Partners";
       }
 
       footer {
-        background-image: url({textureBg.src});
+        background-image: url({textureBg.default.src});
         background-size: cover;
         background-position: center;
         padding: 3rem 1.5rem;
