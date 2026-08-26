@@ -1,0 +1,97 @@
+---
+import { glob } from 'astro/loaders';
+
+// Small identity image
+const identityImages = await glob({
+  pattern: 'public/assets/images/identity/*',
+});
+const identity = identityImages[Math.floor(Math.random() * identityImages.length)];
+
+// Small partnering image
+const partneringImages = await glob({
+  pattern: 'public/assets/images/partnering/*',
+});
+const partnering = partneringImages[Math.floor(Math.random() * partneringImages.length)];
+
+// Large sunrise background
+const sunriseImages = await glob({
+  pattern: 'public/assets/images/sunrise/*',
+});
+const sunrise = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
+
+// Large landscape background
+const landscapeImages = await glob({
+  pattern: 'public/assets/images/landscape/*',
+});
+const landscape = landscapeImages[Math.floor(Math.random() * landscapeImages.length)];
+---
+
+<section class="identity-showcase">
+  <div class="inner">
+
+    <div class="small-images">
+      <img src={identity.src} alt="Identity" class="small-img" />
+      <img src={partnering.src} alt="Partnering" class="small-img" />
+    </div>
+
+    <div class="background sunrise-bg">
+      <h2>Emergence</h2>
+      <p>Identity work begins quietly — like sunrise.</p>
+    </div>
+
+    <div class="background landscape-bg">
+      <h2>Grounding</h2>
+      <p>Identity work needs places to land, pause, breathe.</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .identity-showcase {
+    padding: 4rem 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .small-images {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .small-img {
+    width: 180px;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+  }
+
+  .background {
+    padding: 3rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    color: var(--foreground);
+  }
+
+  .sunrise-bg {
+    background-image: url({sunrise.src});
+    background-size: cover;
+    background-position: center;
+  }
+
+  .landscape-bg {
+    background-image: url({landscape.src});
+    background-size: cover;
+    background-position: center;
+  }
+
+  .background h2 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+</style>

@@ -10,17 +10,74 @@ import FeedBlock from "../components/FeedBlock.astro";
 
 import ServicesCarousel from "../components/ServicesCarousel.astro";
 import TestimonialsCarousel from "../components/TestimonialsCarousel.astro";
+
+import IdentityShowcase from "../components/IdentityShowcase.astro";
+
+// Quiet Mode toggle (ND-friendly)
+const quiet = Astro.url.searchParams.get("quiet") === "true";
 ---
 
-<BaseLayout title="Identity Partners">
-  <HeroBlock />
-  <LeftRect />
-  <RightRect />
+<BaseLayout title="Identity Partners" quiet={quiet}>
+  {quiet ? (
+    <>
+      <section class="quiet-mode">
+        <h1>Identity Partners</h1>
+        <p>
+          Quiet Mode is on.  
+          This view removes images, reduces visual load, and keeps everything calm.
+        </p>
+      </section>
 
-  <GradientBlock />
-  <ServicesCarousel />
-  <TestimonialsCarousel />
+      <LeftRect quiet />
+      <RightRect quiet />
 
-  <TextureBlock />
-  <FeedBlock />
+      <section class="quiet-block">
+        <h2>Clarity Emerges Gradually</h2>
+        <p>Identity work is a gradient — slow, steady, and gentle.</p>
+      </section>
+
+      <ServicesCarousel quiet />
+      <TestimonialsCarousel quiet />
+
+      <section class="quiet-block">
+        <h2>Grounding Matters</h2>
+        <p>Identity work needs places to land, pause, breathe.</p>
+      </section>
+
+      <FeedBlock quiet />
+    </>
+  ) : (
+    <>
+      <HeroBlock />
+      <IdentityShowcase />
+      <LeftRect />
+      <RightRect />
+
+      <GradientBlock />
+      <ServicesCarousel />
+      <TestimonialsCarousel />
+
+      <TextureBlock />
+      <FeedBlock />
+    </>
+  )}
 </BaseLayout>
+
+<style>
+  .quiet-mode {
+    padding: 4rem 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    color: var(--foreground);
+  }
+
+  .quiet-block {
+    padding: 3rem 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--surface-muted);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    color: var(--foreground);
+  }
+</style>
