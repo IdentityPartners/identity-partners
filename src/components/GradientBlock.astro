@@ -1,9 +1,8 @@
 ---
 import { glob } from 'astro/loaders';
 
-// Random sunrise image for gradient anchor
 const sunriseImages = await glob({
-  pattern: '/assets/images/sunrise/*',
+  pattern: 'public/assets/images/sunrise/*',
 });
 const sunrise = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
 ---
@@ -11,14 +10,8 @@ const sunrise = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
 <section class="gradient-block">
   <div class="inner">
     <h2>Clarity Emerges Gradually</h2>
-    <p>
-      Identity work isn’t a switch you flip.  
-      It’s a gradient — a slow, steady shift from confusion to coherence.
-    </p>
-
-    <div class="visual">
-      <img src={sunrise.src} alt="Sunrise" />
-    </div>
+    <p>Identity work isn’t a switch — it’s a gradient.</p>
+    <img src={sunrise.src} alt="Sunrise" class="sunrise-img" />
   </div>
 </section>
 
@@ -26,12 +19,6 @@ const sunrise = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
   .gradient-block {
     padding: 4rem 1.5rem;
     border-bottom: 2px solid var(--border);
-    background: linear-gradient(
-      135deg,
-      #f7f3e9 0%,
-      #f0e9e0 40%,
-      #e8e0d6 100%
-    );
   }
 
   .inner {
@@ -40,21 +27,9 @@ const sunrise = sunriseImages[Math.floor(Math.random() * sunriseImages.length)];
     text-align: center;
   }
 
-  .inner h2 {
-    color: var(--accent);
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .inner p {
-    color: var(--foreground);
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
-
-  .visual img {
+  .sunrise-img {
     max-width: 100%;
     border-radius: 12px;
+    margin-top: 2rem;
   }
 </style>
